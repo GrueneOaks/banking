@@ -52,11 +52,11 @@ const AuthForm = ({ type }: { type: string }) => {
       }
 
       if(type === 'sign-in') {
-        const response = await signIn({
-          email: data.email,
-          password: data.password
-        })
-        if(response) router.push('/')
+        // const response = await signIn({
+        //   email: data.email,
+        //   password: data.password
+        // })
+        // if(response) router.push('/')
       }
     } catch (error) {
       console.log(error);
@@ -195,6 +195,8 @@ const AuthForm = ({ type }: { type: string }) => {
               </div>
             </form>
           </Form>
+
+
           <footer className="flex justify-center gap-1">
             <p className="text-14 font-normal text-gray-600">
               { type === 'sign-in' ? "Don't have an account?" : "Already have an account?" }
