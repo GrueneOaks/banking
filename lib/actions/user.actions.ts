@@ -9,6 +9,16 @@ export const signIn = async ({ email, password }: signInProps) => {
   try {
     const { account } = await createAdminClient();
     const response = await account.createEmailPasswordSession(email, password);
+
+    // cookies().set("appwrite-session", session.secret, {
+    //   path: "/",
+    //   httpOnly: true,
+    //   sameSite: "strict",
+    //   secure: true,
+    // });
+
+    // const user = await getUserInfo({ userId: sessionStorage.userId })
+
     return parseStringify(response);
 
   } catch (error) {
@@ -51,6 +61,18 @@ export async function getLoggedInUser() {
     return parseStringify(user);
     
   } catch (error) {
+    return null;
+  }
+}
+
+export const logoutAccount = async () => {
+  try {
+    const { account } = await createSessionClient();
+    cookies().delete('appwrite-session');
+    await account.deleteSession('current');
+    
+  } catch (error) {
+    console.error('Error', error);
     return null;
   }
 }
